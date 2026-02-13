@@ -5,16 +5,13 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.mtech.addmissions.dto.response.BranchCutoffResponseDTO;
 import com.mtech.addmissions.dto.response.CutoffSummaryDTO;
 import com.mtech.addmissions.exception.ResourseNotExist;
 import com.mtech.addmissions.model.*;
 import com.mtech.addmissions.repository.*;
-
 import jakarta.transaction.Transactional;
 
 @Service
