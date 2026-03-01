@@ -13,7 +13,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.mtech.addmissions.exception.Credentials;
 import java.time.LocalDateTime;
-import java.util.Optional;
 import java.util.Random;
 
 import com.mtech.addmissions.enums.Role;

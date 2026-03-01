@@ -15,6 +15,7 @@ import com.mtech.addmissions.service.implementation.AdminAuthService;
 
 @RestController
 @RequestMapping("/api/admin/auth")
+// @CrossOrigin(origins = "http://localhost:5173")
 public class AuthController {
     @Autowired
     AdminAuthService authService;
