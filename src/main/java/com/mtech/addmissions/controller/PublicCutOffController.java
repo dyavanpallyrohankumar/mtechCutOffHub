@@ -20,13 +20,13 @@ public class PublicCutOffController {
 
     @GetMapping("/college/{collegeID}")
     public ResponseEntity<?> collegeCutoff(@PathVariable String collegeID) throws ResourseNotExist {
-        return new ResponseEntity(cutOffServiceimp.getAllcutOffsOfCollege(collegeID), HttpStatus.OK);
+        return new ResponseEntity<>(cutOffServiceimp.getAllcutOffsOfCollege(collegeID), HttpStatus.OK);
     }
 
     @GetMapping("/college/{collegeID}/branch/{branchID}")
     public ResponseEntity<?> collegeCutoff(@PathVariable String collegeID, @PathVariable String branchID)
             throws ResourseNotExist {
-        return new ResponseEntity(cutOffServiceimp.getAllcutOffsOfCollegeBranch(collegeID, branchID),
+        return new ResponseEntity<>(cutOffServiceimp.getAllcutOffsOfCollegeBranch(collegeID, branchID),
                 HttpStatus.OK);
     }
 }

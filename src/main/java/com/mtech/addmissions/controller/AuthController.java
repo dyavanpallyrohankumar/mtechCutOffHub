@@ -3,6 +3,7 @@ package com.mtech.addmissions.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import com.mtech.addmissions.exception.Credentials;
 import com.mtech.addmissions.service.implementation.AdminAuthService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/api/admin/auth")
 // @CrossOrigin(origins = "http://localhost:5173")
 public class AuthController {
@@ -21,7 +23,7 @@ public class AuthController {
     AdminAuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody AdminLoginRequestDTO dto) throws Credentials {
+    public ResponseEntity<Boolean> login(@RequestBody AdminLoginRequestDTO dto) throws Credentials {
         return new ResponseEntity<>(authService.login(dto), HttpStatus.OK);
     }
 

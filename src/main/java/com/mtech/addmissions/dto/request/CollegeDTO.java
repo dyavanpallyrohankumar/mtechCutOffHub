@@ -1,9 +1,6 @@
 package com.mtech.addmissions.dto.request;
 
 import java.util.List;
-
-import com.mtech.addmissions.model.Branch;
-
 import lombok.*;
 
 @Getter
@@ -19,6 +16,6 @@ public class CollegeDTO {
     // private String district;
     private String universityName;
     private String collegeType;
-    private List<Branch> branches;
+    private List<BranchDTO> branches;
 
 }

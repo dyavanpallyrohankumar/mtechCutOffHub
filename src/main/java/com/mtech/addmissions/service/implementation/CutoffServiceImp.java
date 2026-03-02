@@ -40,10 +40,10 @@ public class CutoffServiceImp {
 
         public List<CutoffSummaryDTO> getAllcutOffsOfCollegeBranch(String collegeID, String branchID)
                         throws ResourseNotExist {
-                College college = collegeRepository.findByCollegeCode(collegeID)
-                                .orElseThrow(() -> new ResourseNotExist("No College Found By College Code"));
-                Branch branch = branchRepository.findByCollegeProgramCode(branchID)
-                                .orElseThrow(() -> new ResourseNotExist("No Branch Found By Branch Code"));
+                // College college = collegeRepository.findByCollegeCode(collegeID)
+                // .orElseThrow(() -> new ResourseNotExist("No College Found By College Code"));
+                // Branch branch = branchRepository.findByCollegeProgramCode(branchID)
+                // .orElseThrow(() -> new ResourseNotExist("No Branch Found By Branch Code"));
 
                 List<CutoffSummary> cutoffs = cutOffRepository.findCutoffsByCollegeCodeAndBranchCode(collegeID,
                                 branchID);

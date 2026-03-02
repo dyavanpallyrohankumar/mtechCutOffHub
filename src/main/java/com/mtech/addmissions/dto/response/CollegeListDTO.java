@@ -8,10 +8,11 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class CollegeListDTO {
-    private Long id;
     private String collegeName;
-    private String collegeType;
-    private String universityName;
-
+    private String collegeAddress;
+    private String collegeCode;
     // private String district;
+    private String universityName;
+    private String collegeType;
+
 }

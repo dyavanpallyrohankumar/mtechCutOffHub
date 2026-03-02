@@ -27,6 +27,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Credentials.class)
     public ResponseEntity<ErrorResponse> CredentialsHandler(Exception e) {
         return new ResponseEntity<>(new ErrorResponse(LocalDateTime.now(), HttpStatus.NO_CONTENT, e.getMessage(),
-                "Message From Resourse Not Found Exception", null), HttpStatus.OK);
+                "Message From Resourse Not Found Exception", null), HttpStatus.UNAUTHORIZED);
     }
 }

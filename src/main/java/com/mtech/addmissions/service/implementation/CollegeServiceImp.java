@@ -8,11 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mtech.addmissions.dto.request.CollegeDTO;
+import com.mtech.addmissions.dto.response.CollegeListDTO;
 import com.mtech.addmissions.exception.ResourseAlreadyExist;
 import com.mtech.addmissions.exception.ResourseNotExist;
 import com.mtech.addmissions.model.College;
 import com.mtech.addmissions.repository.BranchRepository;
 import com.mtech.addmissions.repository.CollegeRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 @Service
 public class CollegeServiceImp {
@@ -36,14 +40,14 @@ public class CollegeServiceImp {
         return mapper.map(collegeRepository.save(newCollege), CollegeDTO.class);
     }
 
-    public CollegeDTO update(CollegeDTO college) throws ResourseNotExist {
+    public CollegeListDTO update(CollegeDTO college) throws ResourseNotExist {
         Optional<College> existing = collegeRepository.findByCollegeCode(college.getCollegeCode());
         if (existing.isPresent()) {
             existing.get().setCollegeAddress(college.getCollegeAddress());
             existing.get().setCollegeName(college.getCollegeName());
             existing.get().setCollegeType(college.getCollegeType());
             existing.get().setUniversityName(college.getUniversityName());
-            return mapper.map(collegeRepository.save(existing.get()), CollegeDTO.class);
+            return mapper.map(collegeRepository.save(existing.get()), CollegeListDTO.class);
         }
         throw new ResourseNotExist(" College Not Exist with Code: " + college.getCollegeCode());
     }
@@ -55,8 +59,24 @@ public class CollegeServiceImp {
         return "College Deleted Sucessfully";
     }
 
-    public List<CollegeDTO> getAllColleges() {
-        return collegeRepository.findAll().stream().map((college) -> mapper.map(college, CollegeDTO.class)).toList();
+    // for normal user
+    public Page<CollegeListDTO> getAllColleges(Integer page, Integer size) {
+
+        int pageNumber = (page != null && page >= 0) ? page : 0;
+        int pageSize = (size != null && size > 0) ? size : 10;
+
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+
+        Page<College> collegePage = collegeRepository.findAll(pageable);
+        System.out.println(collegePage);
+        // return null;
+        return collegePage.map(college -> mapper.map(college, CollegeListDTO.class));
+    }
+
+    // for Admin
+    public List<CollegeListDTO> getAllColleges() {
+        return collegeRepository.findAll().stream().map((college) -> mapper.map(college, CollegeListDTO.class))
+                .toList();
     }
 
     public CollegeDTO getCollegeByID(String collegeID) throws ResourseNotExist {

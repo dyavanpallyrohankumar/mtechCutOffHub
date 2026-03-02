@@ -5,6 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.mtech.addmissions.dto.request.BranchDTO;
+import com.mtech.addmissions.dto.request.CollegeDTO;
 import com.mtech.addmissions.dto.response.CollegeWithBranchesDTO;
 import com.mtech.addmissions.exception.ResourseNotExist;
 import com.mtech.addmissions.model.*;
@@ -34,15 +35,31 @@ public class BranchServiceImp {
                 return mapper.map(college, CollegeWithBranchesDTO.class);
         }
 
-        public List<BranchDTO> getBranchesbyCollegeID(String collegeID) throws ResourseNotExist {
+        // public List<BranchDTO> getBranchesbyCollegeID(String collegeID) throws
+        // ResourseNotExist {
+        // College college = collegeRepository.findByCollegeCode(collegeID)
+        // .orElseThrow(() -> new ResourseNotExist("NO college Found"));
+        // // System.out.println(branchRepository.findAllByCollege(college));
+        // // branchRepository.findAllByCollege(college);
+        // List<BranchDTO> dtos = branchRepository.findAllByCollege(college).stream()
+        // .map((branch) -> mapper.map(branch, BranchDTO.class))
+        // .toList();
+        // return dtos;
+        // }
+
+        public CollegeDTO getBranchesbyCollegeID(String collegeID) throws ResourseNotExist {
                 College college = collegeRepository.findByCollegeCode(collegeID)
                                 .orElseThrow(() -> new ResourseNotExist("NO college Found"));
                 // System.out.println(branchRepository.findAllByCollege(college));
                 // branchRepository.findAllByCollege(college);
+
                 List<BranchDTO> dtos = branchRepository.findAllByCollege(college).stream()
                                 .map((branch) -> mapper.map(branch, BranchDTO.class))
                                 .toList();
-                return dtos;
+
+                return new CollegeDTO(college.getId(), college.getCollegeName(), college.getCollegeAddress(),
+                                college.getCollegeCode(),
+                                college.getUniversityName(), college.getCollegeType(), dtos);
         }
 
 }

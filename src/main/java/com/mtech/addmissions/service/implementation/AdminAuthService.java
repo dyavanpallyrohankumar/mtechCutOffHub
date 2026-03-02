@@ -36,7 +36,7 @@ public class AdminAuthService {
     private PasswordEncoder passwordEncoder;
 
     // STEP 1: username + password
-    public String login(AdminLoginRequestDTO dto) throws Credentials {
+    public Boolean login(AdminLoginRequestDTO dto) throws Credentials {
 
         AdminUser admin = adminRepo.findByUsername(dto.getUsername())
                 .orElseThrow(() -> new Credentials("Invalid credentials"));
@@ -52,11 +52,11 @@ public class AdminAuthService {
         adminOtp.setOtp(otp);
         adminOtp.setExpiresAt(LocalDateTime.now().plusMinutes(5));
         adminOtp.setVerified(false);
-
+        System.out.println(adminOtp);
         otpRepo.save(adminOtp);
 
-        emailService.sendOtp(admin.getEmail(), otp);
-        return "OTP sent to registered email";
+        // emailService.sendOtp(admin.getEmail(), otp);
+        return true;
     }
 
     public String register(AdminLoginRequestDTO dto) throws Credentials {
