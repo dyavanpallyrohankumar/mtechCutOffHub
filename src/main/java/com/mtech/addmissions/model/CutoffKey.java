@@ -19,12 +19,24 @@ import lombok.*;
 //     private final Integer year;
 // }
 
+// @Getter
+// @AllArgsConstructor
+// @EqualsAndHashCode
+// public class CutoffKey {
+
+//     private final String programCode; // college+branch unique
+//     private final String category;
+//     private final Gender gender;
+//     private final Exam exam;
+//     private final String phase;
+//     private final Integer year;
+// }
+
 @Getter
 @AllArgsConstructor
 @EqualsAndHashCode
 public class CutoffKey {
 
-    private final String programCode; // college+branch unique
     private final String category;
     private final Gender gender;
     private final Exam exam;

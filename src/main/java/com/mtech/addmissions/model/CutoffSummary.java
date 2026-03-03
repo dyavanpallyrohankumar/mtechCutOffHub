@@ -2,7 +2,6 @@ package com.mtech.addmissions.model;
 
 import com.mtech.addmissions.enums.Exam;
 import com.mtech.addmissions.enums.Gender;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -16,36 +15,68 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "cutoff_summary", uniqueConstraints = @UniqueConstraint(name = "uk_cutoff_logical_key", columnNames = {
+        "college_id",
+        "branch_id",
+        "category",
+        "gender",
+        "exam",
+        "phase",
+        "year"
+}), indexes = {
+        @Index(name = "idx_cutoff_college", columnList = "college_id"),
+        @Index(name = "idx_cutoff_branch", columnList = "branch_id"),
+        @Index(name = "idx_cutoff_year", columnList = "year")
+})
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class CutoffSummary {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "college_id")
+    // =========================
+    // RELATIONSHIPS
+    // =========================
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "college_id", nullable = false)
     private College college;
 
-    @ManyToOne
-    @JoinColumn(name = "branch_id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "branch_id", nullable = false)
     private Branch branch;
 
+    // =========================
+    // LOGICAL CUT-OFF KEY
+    // =========================
+
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Exam exam;
 
+    @Column(nullable = false)
     private String category;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "gender")
+    @Column(nullable = false)
     private Gender gender;
 
+    @Column(nullable = false)
     private String phase;
+
+    @Column(nullable = false)
     private Integer year;
+
+    // =========================
+    // ANALYTICS VALUES
+    // =========================
 
     private Integer startRank;
     private Integer endRank;
@@ -53,11 +84,23 @@ public class CutoffSummary {
     private Double startPercentile;
     private Double endPercentile;
 
+    // =========================
+    // SAFE toString
+    // =========================
+
     @Override
     public String toString() {
-        return "CutoffSummary [id=" + id + ", exam=" + exam + ", category=" + category + ", gender=" + gender
-                + ", phase=" + phase + ", year=" + year + ", startRank=" + startRank + ", endRank=" + endRank
-                + ", startPercentile=" + startPercentile + ", endPercentile=" + endPercentile + "]";
+        return "CutoffSummary{" +
+                "id=" + id +
+                ", exam=" + exam +
+                ", category='" + category + '\'' +
+                ", gender=" + gender +
+                ", phase='" + phase + '\'' +
+                ", year=" + year +
+                ", startRank=" + startRank +
+                ", endRank=" + endRank +
+                ", startPercentile=" + startPercentile +
+                ", endPercentile=" + endPercentile +
+                '}';
     }
-
 }
