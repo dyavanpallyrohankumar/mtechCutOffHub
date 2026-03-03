@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="color-scheme" content="light dark">
+    <meta name="supported-color-schemes" content="light dark">
+    <title>Your OTP - MTech Cutoff Hub</title>
+</head>
+
+<body style="margin:0;padding:0;background-color:#f2f4ff;font-family:Arial,Helvetica,sans-serif;">
+
+    <!-- Preheader (hidden preview text) -->
+    <div style="display:none;font-size:1px;color:#f2f4ff;max-height:0;overflow:hidden;">
+        Your secure OTP for MTech Cutoff Hub login. Valid for 10 minutes.
+    </div>
+
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#f2f4ff">
+        <tr>
+            <td align="center" style="padding:40px 15px;">
+
+                <table width="620" cellpadding="0" cellspacing="0" border="0" style="max-width:620px;background:#ffffff;border-radius:18px;overflow:hidden;
+box-shadow:0 12px 35px rgba(0,0,0,0.08);">
+
+                    <!-- Gradient strip -->
+                    <tr>
+                        <td style="height:6px;background:#6366f1;"></td>
+                    </tr>
+
+                    <!-- Header -->
+                    <tr>
+                        <td align="center" bgcolor="#4f46e5" style="padding:45px 30px;color:#ffffff;">
+
+                            <img th:src="${logoUrl}" src="https://yourcdn.com/logo.png" width="70"
+                                style="display:block;margin-bottom:18px;" />
+
+                            <div style="font-size:26px;font-weight:bold;">
+                                🔐 Verify Your Identity
+                            </div>
+
+                            <div style="font-size:14px;opacity:0.9;margin-top:6px;">
+                                Secure Admin Access · MTech Cutoff Hub
+                            </div>
+
+                        </td>
+                    </tr>
+
+                    <!-- Body -->
+                    <tr>
+                        <td style="padding:40px 40px 20px 40px;color:#333;">
+
+                            <p style="font-size:16px;font-weight:bold;margin-bottom:10px;">
+                                Hello <span th:text="${adminName}">Admin</span>,
+                            </p>
+
+                            <p style="font-size:14px;line-height:1.7;color:#555;margin-bottom:28px;">
+                                A login attempt was detected for your admin account.
+                                Use the one-time password below to continue.
+                                This code expires in <strong>10 minutes</strong>.
+                            </p>
+
+                            <!-- OTP Container -->
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0"
+                                style="background:#f7f8ff;border:2px solid #dcdcff;border-radius:14px;">
+                                <tr>
+                                    <td align="center" style="padding:28px 10px;">
+
+                                        <div style="
+font-size:36px;
+letter-spacing:12px;
+font-weight:bold;
+color:#4f46e5;
+font-family:Courier,monospace;">
+                                            <span th:text="${otp}">123456</span>
+                                        </div>
+
+                                        <div style="font-size:12px;color:#888;margin-top:10px;">
+                                            Enter this code on the verification screen
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Animated fallback (safe GIF) -->
+                            <div style="text-align:center;margin-top:20px;">
+                                <img src="https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif" width="80"
+                                    alt="Security Shield" style="display:block;margin:0 auto;" />
+                            </div>
+
+                            <!-- Metadata -->
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0"
+                                style="margin-top:30px;background:#fafbff;border-radius:10px;">
+                                <tr>
+                                    <td style="padding:15px;font-size:13px;color:#555;line-height:1.6;">
+
+                                        <strong>Login Details:</strong><br>
+                                        🕐 Time: <span th:text="${requestTime}">2026-03-03 10:42 IST</span><br>
+                                        📍 IP: <span th:text="${ipAddress}">122.161.0.1</span><br>
+                                        💻 Device: <span th:text="${deviceInfo}">Chrome on Windows</span>
+
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Security Notice -->
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0"
+                                style="margin-top:25px;background:#fff5f5;border:1px solid #ffdede;border-radius:10px;">
+                                <tr>
+                                    <td style="padding:16px;font-size:13px;color:#b91c1c;">
+                                        🚨 <strong>Security Notice:</strong>
+                                        Never share this OTP. MTech Cutoff Hub will never request your code via phone or
+                                        email.
+                                        If this wasn't you, please secure your account immediately.
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </td>
+                    </tr>
+
+                    <!-- Footer -->
+                    <tr>
+                        <td align="center" bgcolor="#fafbff"
+                            style="padding:28px 30px;font-size:12px;color:#777;line-height:1.6;">
+
+                            © 2026 MTech Cutoff Hub<br>
+                            <a th:href="${unsubscribeUrl}" href="#" style="color:#4f46e5;text-decoration:none;">
+                                Unsubscribe
+                            </a> ·
+                            <a href="mailto:support@mtechhub.in" style="color:#4f46e5;text-decoration:none;">
+                                Contact Support
+                            </a>
+
+                        </td>
+                    </tr>
+
+                </table>
+
+                <!-- Tracking Pixel -->
+                <img th:src="${trackingPixelUrl}" src="https://yourdomain.com/track?email=test" width="1" height="1"
+                    style="display:none;" />
+
+            </td>
+        </tr>
+    </table>
+
+</body>
+
+</html>

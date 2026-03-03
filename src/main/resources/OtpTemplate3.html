@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Your OTP Code — MTech Cutoff Hub</title>
+    <!--[if mso]>
+  <noscript>
+    <xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml>
+  </noscript>
+  <![endif]-->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f0eeff;
+            margin: 0;
+            padding: 0;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+
+        .email-wrapper {
+            background: linear-gradient(160deg, #f0eeff 0%, #fce8f6 50%, #e8f5ff 100%);
+            min-height: 100vh;
+            padding: 48px 16px;
+        }
+
+        .email-container {
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        /* ── Brand header ── */
+        .brand-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .brand-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .brand-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.35);
+        }
+
+        .brand-name {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #18103a;
+            letter-spacing: -0.01em;
+        }
+
+        .brand-name span {
+            color: #6366f1;
+        }
+
+        /* ── Main card ── */
+        .email-card {
+            background: #ffffff;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow:
+                0 4px 6px rgba(99, 102, 241, 0.04),
+                0 20px 60px rgba(99, 102, 241, 0.12),
+                0 1px 0 rgba(255, 255, 255, 0.8) inset;
+            border: 1.5px solid rgba(99, 102, 241, 0.10);
+        }
+
+        /* ── Card top gradient strip ── */
+        .card-strip {
+            height: 5px;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899, #f59e0b, #10b981);
+        }
+
+        /* ── Hero section ── */
+        .card-hero {
+            background: linear-gradient(135deg, #6366f1 0%, #7c3aed 50%, #a855f7 100%);
+            padding: 44px 40px 36px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-hero::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .card-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -40px;
+            left: -40px;
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .hero-shield {
+            width: 72px;
+            height: 72px;
+            background: rgba(255, 255, 255, 0.18);
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            margin-bottom: 16px;
+            border: 1.5px solid rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.2;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-sub {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.5;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ── Card body ── */
+        .card-body {
+            padding: 40px 40px 32px;
+        }
+
+        .greeting {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #18103a;
+            margin-bottom: 12px;
+        }
+
+        .body-text {
+            font-size: 0.9rem;
+            color: #5a5270;
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+
+        /* ── OTP block ── */
+        .otp-label {
+            font-size: 0.68rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #a09cb5;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .otp-label::before,
+        .otp-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.15));
+        }
+
+        .otp-label::after {
+            background: linear-gradient(90deg, rgba(99, 102, 241, 0.15), transparent);
+        }
+
+        .otp-box {
+            background: linear-gradient(135deg, #faf9ff, #f5f0ff);
+            border: 2px solid rgba(99, 102, 241, 0.20);
+            border-radius: 18px;
+            padding: 28px 24px;
+            text-align: center;
+            margin-bottom: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .otp-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899);
+        }
+
+        .otp-digits {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .otp-digit {
+            width: 52px;
+            height: 64px;
+            background: #ffffff;
+            border: 2px solid rgba(99, 102, 241, 0.18);
+            border-radius: 14px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #4f46e5;
+            font-family: 'Plus Jakarta Sans', monospace;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.10), 0 1px 0 rgba(255, 255, 255, 0.8) inset;
+            letter-spacing: -0.02em;
+        }
+
+        .otp-digit:nth-child(3) {
+            margin-right: 6px;
+        }
+
+        .otp-digit:nth-child(4) {
+            margin-left: 6px;
+        }
+
+        /* Separator dot */
+        .otp-sep {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 -2px;
+        }
+
+        .otp-sep-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(99, 102, 241, 0.30);
+        }
+
+        .otp-copy-hint {
+            font-size: 0.75rem;
+            color: #a09cb5;
+            font-weight: 500;
+        }
+
+        /* Timer badge */
+        .otp-timer {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(245, 158, 11, 0.10);
+            border: 1px solid rgba(245, 158, 11, 0.22);
+            border-radius: 100px;
+            padding: 5px 14px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #d97706;
+            margin-bottom: 28px;
+        }
+
+        .timer-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #f59e0b;
+        }
+
+        /* ── Info cards ── */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+
+        .info-card {
+            background: #faf9ff;
+            border: 1.5px solid rgba(99, 102, 241, 0.09);
+            border-radius: 14px;
+            padding: 14px 16px;
+        }
+
+        .info-card-icon {
+            font-size: 1.2rem;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .info-card-title {
+            font-size: 0.72rem;
+            font-weight: 800;
+            color: #18103a;
+            margin-bottom: 2px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .info-card-val {
+            font-size: 0.8rem;
+            color: #5a5270;
+            font-weight: 500;
+        }
+
+        /* ── Security notice ── */
+        .security-box {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.06), rgba(245, 158, 11, 0.06));
+            border: 1.5px solid rgba(239, 68, 68, 0.14);
+            border-radius: 14px;
+            padding: 16px 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+
+        .security-icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .security-text {
+            font-size: 0.8rem;
+            color: #6b4c4c;
+            line-height: 1.55;
+        }
+
+        .security-text strong {
+            color: #c0392b;
+            font-weight: 700;
+        }
+
+        /* ── Divider ── */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.12), transparent);
+            margin: 0 -40px 28px;
+        }
+
+        /* ── Footer ── */
+        .card-footer {
+            background: #faf9ff;
+            border-top: 1px solid rgba(99, 102, 241, 0.08);
+            padding: 24px 40px;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 14px;
+        }
+
+        .footer-link {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #6366f1;
+            text-decoration: none;
+        }
+
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+
+        .footer-text {
+            font-size: 0.74rem;
+            color: #a09cb5;
+            line-height: 1.6;
+        }
+
+        .footer-text a {
+            color: #6366f1;
+            text-decoration: none;
+        }
+
+        /* ── Below card ── */
+        .below-card {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .below-text {
+            font-size: 0.75rem;
+            color: #a09cb5;
+            line-height: 1.6;
+        }
+
+        .below-text a {
+            color: #6366f1;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Preview controls (not part of email) */
+        .preview-controls {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            display: flex;
+            gap: 8px;
+            z-index: 999;
+        }
+
+        .ctrl-btn {
+            padding: 8px 16px;
+            border-radius: 10px;
+            background: #6366f1;
+            color: #fff;
+            font-size: 0.78rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+            transition: transform .2s;
+        }
+
+        .ctrl-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .ctrl-btn.secondary {
+            background: #fff;
+            color: #6366f1;
+            border: 1.5px solid rgba(99, 102, 241, 0.22);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+        }
+
+        @media (max-width: 520px) {
+
+            .card-hero,
+            .card-body,
+            .card-footer {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .divider {
+                margin-left: -24px;
+                margin-right: -24px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .otp-digit {
+                width: 44px;
+                height: 56px;
+                font-size: 1.5rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="email-wrapper">
+        <div class="email-container">
+
+            <!-- Brand header -->
+            <div class="brand-header">
+                <div class="brand-logo">
+                    <div class="brand-icon">🎓</div>
+                    <span class="brand-name">MTech<span>Hub</span></span>
+                </div>
+            </div>
+
+            <!-- Main card -->
+            <div class="email-card">
+
+                <!-- Rainbow strip -->
+                <div class="card-strip"></div>
+
+                <!-- Hero -->
+                <div class="card-hero">
+                    <div class="hero-shield">🔐</div>
+                    <div class="hero-title">Verify Your Identity</div>
+                    <div class="hero-sub">Use the code below to complete your<br />secure admin login to MTech Cutoff
+                        Hub</div>
+                </div>
+
+                <!-- Body -->
+                <div class="card-body">
+
+                    <div class="greeting">Hello, Admin 👋</div>
+                    <div class="body-text">
+                        We received a login request for your MTech Cutoff Hub admin account.
+                        Enter the one-time password below to continue. This code is valid for
+                        <strong style="color:#18103a;">10 minutes</strong> only.
+                    </div>
+
+                    <!-- OTP label -->
+                    <div class="otp-label">Your One-Time Password</div>
+
+                    <!-- OTP box -->
+                    <div class="otp-box">
+                        <div class="otp-digits">
+                            <div class="otp-digit">4</div>
+                            <div class="otp-digit">8</div>
+                            <div class="otp-digit">3</div>
+                            <div class="otp-sep">
+                                <div class="otp-sep-dot"></div>
+                            </div>
+                            <div class="otp-digit">9</div>
+                            <div class="otp-digit">1</div>
+                            <div class="otp-digit">2</div>
+                        </div>
+                        <div class="otp-copy-hint">↑ Enter this code on the verification screen</div>
+                    </div>
+
+                    <!-- Timer -->
+                    <div style="text-align:center; margin-bottom:28px;">
+                        <div class="otp-timer">
+                            <div class="timer-dot"></div>
+                            Expires in 10 minutes · Do not share this code
+                        </div>
+                    </div>
+
+                    <!-- Info grid -->
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <span class="info-card-icon">🕐</span>
+                            <div class="info-card-title">Requested At</div>
+                            <div class="info-card-val">Today, 10:42 AM IST</div>
+                        </div>
+                        <div class="info-card">
+                            <span class="info-card-icon">📍</span>
+                            <div class="info-card-title">Location</div>
+                            <div class="info-card-val">Bengaluru, Karnataka</div>
+                        </div>
+                        <div class="info-card">
+                            <span class="info-card-icon">💻</span>
+                            <div class="info-card-title">Device</div>
+                            <div class="info-card-val">Chrome on Windows</div>
+                        </div>
+                        <div class="info-card">
+                            <span class="info-card-icon">🔒</span>
+                            <div class="info-card-title">Access Level</div>
+                            <div class="info-card-val">Admin · Full Access</div>
+                        </div>
+                    </div>
+
+                    <!-- Security notice -->
+                    <div class="security-box">
+                        <div class="security-icon">🚨</div>
+                        <div class="security-text">
+                            <strong>Never share this code.</strong> MTech Cutoff Hub will
+                            <strong>never</strong> ask for your OTP via phone, chat, or email.
+                            If you didn't request this login, please
+                            <a href="#" style="color:#c0392b; font-weight:700;">secure your account immediately</a>.
+                        </div>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <!-- Closing -->
+                    <div class="body-text" style="margin-bottom:0;">
+                        If you're having trouble logging in, reply to this email or visit our
+                        <a href="#" style="color:#6366f1; font-weight:700;">Help Center</a>.
+                        We're here to help.
+                    </div>
+
+                </div>
+
+                <!-- Footer -->
+                <div class="card-footer">
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">Privacy Policy</a>
+                        <a href="#" class="footer-link">Help Center</a>
+                        <a href="#" class="footer-link">Contact Us</a>
+                        <a href="#" class="footer-link">Unsubscribe</a>
+                    </div>
+                    <div class="footer-text">
+                        © 2026 MTech Cutoff Hub · Built for students, by students.<br />
+                        This is an automated security email sent to
+                        <a href="#">admin@mtechhub.in</a>.<br />
+                        Please do not reply directly to this email.
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Below card note -->
+            <div class="below-card">
+                <div class="below-text">
+                    Didn't request this? <a href="#">Click here to report suspicious activity</a><br />
+                    or contact us at <a href="mailto:support@mtechhub.in">support@mtechhub.in</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Preview controls — remove in production -->
+    <div class="preview-controls">
+        <button class="ctrl-btn secondary" onclick="regenerateOTP()">🔄 New OTP</button>
+        <button class="ctrl-btn" onclick="copyHTML()">📋 Copy HTML</button>
+    </div>
+
+    <script>
+        function regenerateOTP() {
+            const otp = String(Math.floor(100000 + Math.random() * 900000)).split('');
+            const digits = document.querySelectorAll('.otp-digit');
+            digits.forEach((d, i) => {
+                d.style.transform = 'scale(0.8)';
+                d.style.opacity = '0.4';
+                setTimeout(() => {
+                    d.textContent = otp[i];
+                    d.style.transform = 'scale(1)';
+                    d.style.opacity = '1';
+                }, 120 + i * 60);
+            });
+        }
+
+        function copyHTML() {
+            const html = document.documentElement.outerHTML;
+            navigator.clipboard.writeText(html).then(() => {
+                const btn = document.querySelectorAll('.ctrl-btn')[1];
+                btn.textContent = '✅ Copied!';
+                setTimeout(() => btn.textContent = '📋 Copy HTML', 2000);
+            });
+        }
+
+        // Animate OTP digits on load
+        document.querySelectorAll('.otp-digit').forEach((d, i) => {
+            d.style.opacity = '0';
+            d.style.transform = 'translateY(10px)';
+            setTimeout(() => {
+                d.style.transition = 'all 0.4s cubic-bezier(0.34,1.56,0.64,1)';
+                d.style.opacity = '1';
+                d.style.transform = 'translateY(0)';
+            }, 300 + i * 80);
+        });
+    </script>
+
+</body>
+
+</html>
