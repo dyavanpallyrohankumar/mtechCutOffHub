@@ -8,7 +8,15 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.mtech.addmissions.dto.response.BranchCutoffStructuredResponseDTO;
+import com.mtech.addmissions.dto.response.BranchCutoffStructuredResponseDTO.CategoryDTO;
+import com.mtech.addmissions.dto.response.BranchCutoffStructuredResponseDTO.ExamDTO;
+import com.mtech.addmissions.dto.response.BranchCutoffStructuredResponseDTO.GenderCutoffDTO;
+import com.mtech.addmissions.dto.response.BranchCutoffStructuredResponseDTO.PhaseDTO;
+import com.mtech.addmissions.dto.response.BranchCutoffStructuredResponseDTO.YearDTO;
 import com.mtech.addmissions.dto.response.CutoffSummaryDTO;
+import com.mtech.addmissions.enums.Exam;
+import com.mtech.addmissions.enums.Gender;
 import com.mtech.addmissions.exception.ResourseNotExist;
 import com.mtech.addmissions.model.*;
 import com.mtech.addmissions.repository.*;
@@ -51,6 +59,97 @@ public class CutoffServiceImp {
                                 .map((cutoff) -> mapper.map(cutoff, CutoffSummaryDTO.class))
                                 .toList();
                 return dtos;
+        }
+
+        public BranchCutoffStructuredResponseDTO getStructuredCutoffsOfCollegeBranch(
+                        String collegeID,
+                        String branchID) throws ResourseNotExist {
+
+                College college = collegeRepository.findByCollegeCode(collegeID)
+                                .orElseThrow(() -> new ResourseNotExist("No College Found"));
+
+                Branch branch = branchRepository.findByCollegeProgramCode(branchID)
+                                .orElseThrow(() -> new ResourseNotExist("No Branch Found"));
+
+                List<CutoffSummary> cutoffs = cutOffRepository.findCutoffsByCollegeCodeAndBranchCode(collegeID,
+                                branchID);
+
+                // -----------------------------
+                // GROUPING STARTS HERE
+                // -----------------------------
+
+                Map<Integer, Map<String, Map<String, Map<Exam, Map<Gender, CutoffSummary>>>>> grouped = cutoffs.stream()
+                                .collect(Collectors.groupingBy(
+                                                CutoffSummary::getYear,
+                                                Collectors.groupingBy(
+                                                                CutoffSummary::getPhase,
+                                                                Collectors.groupingBy(
+                                                                                CutoffSummary::getCategory,
+                                                                                Collectors.groupingBy(
+                                                                                                CutoffSummary::getExam,
+                                                                                                Collectors.toMap(
+                                                                                                                CutoffSummary::getGender,
+                                                                                                                c -> c))))));
+
+                // -----------------------------
+                // CONVERT MAP → DTO
+                // -----------------------------
+
+                List<YearDTO> yearList = grouped.entrySet().stream().map(yearEntry -> {
+
+                        Integer year = yearEntry.getKey();
+
+                        List<PhaseDTO> phases = yearEntry.getValue().entrySet().stream().map(phaseEntry -> {
+
+                                String phase = phaseEntry.getKey();
+
+                                List<CategoryDTO> categories = phaseEntry.getValue().entrySet().stream()
+                                                .map(catEntry -> {
+
+                                                        String category = catEntry.getKey();
+
+                                                        List<ExamDTO> exams = catEntry.getValue().entrySet().stream()
+                                                                        .map(examEntry -> {
+
+                                                                                Exam exam = examEntry.getKey();
+
+                                                                                List<GenderCutoffDTO> genders = examEntry
+                                                                                                .getValue().entrySet()
+                                                                                                .stream()
+                                                                                                .map(genderEntry -> {
+
+                                                                                                        CutoffSummary c = genderEntry
+                                                                                                                        .getValue();
+
+                                                                                                        return new GenderCutoffDTO(
+                                                                                                                        genderEntry.getKey(),
+                                                                                                                        c.getStartRank(),
+                                                                                                                        c.getEndRank(),
+                                                                                                                        c.getStartPercentile(),
+                                                                                                                        c.getEndPercentile());
+
+                                                                                                }).toList();
+
+                                                                                return new ExamDTO(exam, genders);
+
+                                                                        }).toList();
+
+                                                        return new CategoryDTO(category, exams);
+
+                                                }).toList();
+
+                                return new PhaseDTO(phase, categories);
+
+                        }).toList();
+
+                        return new YearDTO(year, phases);
+
+                }).toList();
+
+                return new BranchCutoffStructuredResponseDTO(
+                                college.getId(),
+                                branch.getId(),
+                                yearList);
         }
 
         // =========================================================

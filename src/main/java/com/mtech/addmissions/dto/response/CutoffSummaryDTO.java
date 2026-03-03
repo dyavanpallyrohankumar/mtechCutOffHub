@@ -11,11 +11,16 @@ import lombok.*;
 @Builder
 @Data
 public class CutoffSummaryDTO {
-    private String category;
-    private Gender gender;
-    private Exam exam;
+       private Integer year;
+
     private String phase;
-    private Integer year;
+    private String category;
+
+
+    private Exam exam;
+
+
+ private Gender gender;
 
     private Integer startRank;
     private Integer endRank;

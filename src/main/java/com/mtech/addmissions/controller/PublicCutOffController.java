@@ -26,7 +26,7 @@ public class PublicCutOffController {
     @GetMapping("/college/{collegeID}/branch/{branchID}")
     public ResponseEntity<?> collegeCutoff(@PathVariable String collegeID, @PathVariable String branchID)
             throws ResourseNotExist {
-        return new ResponseEntity<>(cutOffServiceimp.getAllcutOffsOfCollegeBranch(collegeID, branchID),
+        return new ResponseEntity<>(cutOffServiceimp.getStructuredCutoffsOfCollegeBranch(collegeID, branchID),
                 HttpStatus.OK);
     }
 }

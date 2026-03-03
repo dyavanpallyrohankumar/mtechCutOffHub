@@ -8,7 +8,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BranchCutoffResponseDTO {
+public class BranchCutoffAdminResponseDTO {
     private Long collegeId;
     private String collegeName;
     private Long branchId;
