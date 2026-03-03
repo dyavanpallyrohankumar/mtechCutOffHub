@@ -62,4 +62,11 @@ public class BranchServiceImp {
                                 college.getUniversityName(), college.getCollegeType(), dtos);
         }
 
+        public List<BranchDTO> getBranches() throws ResourseNotExist {
+
+                return branchRepository.findAll().stream()
+                                .map((branch) -> mapper.map(branch, BranchDTO.class))
+                                .toList();
+        }
+
 }

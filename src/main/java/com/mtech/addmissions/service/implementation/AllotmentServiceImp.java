@@ -76,4 +76,11 @@ public class AllotmentServiceImp {
                                 .map((student) -> mapper.map(student, StudentAllotmentDTO.class)).toList();
                 return dtos;
         }
+
+        public List<StudentAllotmentDTO> allotedStudents() {
+                return studentAllotmentRepository.findAll()
+                                .stream()
+                                .map((student) -> mapper.map(student, StudentAllotmentDTO.class))
+                                .toList();
+        }
 }

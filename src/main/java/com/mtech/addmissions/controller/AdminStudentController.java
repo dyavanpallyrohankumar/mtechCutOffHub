@@ -27,6 +27,11 @@ public class AdminStudentController {
         return new ResponseEntity<>(allotmentServiceImp.alloteStudent(student), HttpStatus.CREATED);
     }
 
+    @GetMapping()
+    public ResponseEntity<?> collegeallotedStudents() throws ResourseNotExist {
+        return new ResponseEntity<>(allotmentServiceImp.allotedStudents(), HttpStatus.OK);
+    }
+
     @GetMapping("/college/{collegeID}")
     public ResponseEntity<?> collegeallotedStudents(@PathVariable String collegeID) throws ResourseNotExist {
         return new ResponseEntity<>(allotmentServiceImp.collegeAllotedStudents(collegeID), HttpStatus.OK);
