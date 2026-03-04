@@ -1,7 +1,9 @@
 package com.mtech.addmissions.model;
 
+import java.time.LocalDateTime;
 import java.util.List;
-
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,6 +39,12 @@ public class Branch {
 
     @OneToMany(mappedBy = "branch", cascade = CascadeType.ALL)
     private List<CutoffSummary> cutoffs;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
     public Branch(String branchName, String collegeProgramCode) {
         this.branchName = branchName;

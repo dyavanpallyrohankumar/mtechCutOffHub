@@ -1,9 +1,11 @@
 package com.mtech.addmissions.model;
 
+import java.time.LocalDateTime;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import com.mtech.addmissions.enums.Exam;
 import com.mtech.addmissions.enums.Gender;
 import com.mtech.addmissions.enums.Region;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -57,6 +59,12 @@ public class StudentAllotment {
 
     private Integer year;// default now 2025
     private String collegeProgramCode;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
     public StudentAllotment(College college, Branch branch, String studentName,
             String catogory, String allotedCategory, String phase, String scoreOrPercentile,
